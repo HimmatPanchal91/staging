@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunflora | Boutique Floral & Botanical Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sunflora: {
+                            gold: '#E5A93C',
+                            amber: '#D97706',
+                            warm: '#FAF6F0',
+                            cream: '#FFFDF9',
+                            sage: '#5F7A61',
+                            deepSage: '#344E41',
+                            terracotta: '#C86D51',
+                            dark: '#2A2B2A',
+                            accentBg: '#F3EDE2'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+            color: #2A2B2A;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C8B29B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5F7A61;
+        }
+        .slide-item {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        .slide-item.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .card-shadow:hover {
+            box-shadow: 0 12px 30px rgba(95, 122, 97, 0.15);
+            transform: translateY(-4px);
+        }
+        .toast-slide {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-sunflora-warm antialiased text-sunflora-dark selection:bg-sunflora-gold selection:text-white flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <!-- <div class="bg-sunflora-deepSage text-sunflora-cream text-xs py-2.5 px-4 text-center tracking-wide font-medium flex items-center justify-center gap-2"> -->
+        <!-- <i class="fa-solid fa-sun text-sunflora-gold animate-spin-slow"></i> -->
+        <!-- <span>Free standard delivery on all orders over $75 | Use Code <strong class="underline decoration-sunflora-gold font-bold">SUNBLOOM</strong></span> -->
+    <!-- </div> -->
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-sunflora-cream/95 backdrop-blur-md border-b border-sunflora-accentBg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <!-- <div class="w-10 h-10 rounded-full bg-sunflora-gold/20 flex items-center justify-center text-sunflora-amber text-xl group-hover:rotate-45 transition-transform duration-500"> -->
+                        <!-- <i class="fa-solid fa-flower"></i> -->
+                    <!-- </div> -->
+                    <div class="flex flex-col">
+					<img src="../img/Logo.PNG" alt="Sunflowers Logo" >
+                        <!-- <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-sunflora-deepSage group-hover:text-sunflora-amber transition-colors"> -->
+                            
+							<!-- <span class="text-sunflora-gold">.</span> -->
+                        <!-- </span> -->
+                        <!-- <span class="text-[9px] uppercase tracking-[0.25em] text-sunflora-sage font-semibold -mt-1">Botanical Studio</span> -->
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <!-- <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-sunflora-dark/80"> -->
+                    <!-- <a href="#hero" class="hover:text-sunflora-amber transition-colors">Home</a> -->
+                    <!-- <a href="#shop" class="hover:text-sunflora-amber transition-colors">Shop</a> -->
+                    <!-- <a href="#categories" class="hover:text-sunflora-amber transition-colors">Categories</a> -->
+                    <!-- <a href="#about" class="hover:text-sunflora-amber transition-colors">About Us</a> -->
+                    <!-- <a href="#footer" class="hover:text-sunflora-amber transition-colors">Contact</a> -->
+                <!-- </nav> -->
+
+                <!-- Action Icons & Search -->
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <!-- Search Bar -->
+                    <div class="relative hidden sm:block w-48 lg:w-64">
+                        <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search..." class="w-full bg-sunflora-accentBg/60 text-xs text-sunflora-dark py-2.5 pl-9 pr-4 rounded-full border border-transparent focus:border-sunflora-gold focus:bg-white focus:outline-none transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sunflora-sage/70 text-xs"></i>
+                    </div>
+
+					<nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-sunflora-dark/80">                        
+                        <a href="#categories" class="hover:text-sunflora-amber transition-colors">Products</a>                
+                        <a href="#footer" class="hover:text-sunflora-amber transition-colors">Support</a>
+					</nav>
+				
+                    <!-- Wishlist Button -->
+                    <!-- <button onclick="toggleWishlistModal()" class="relative p-2 text-sunflora-deepSage hover:text-sunflora-amber transition-colors" title="Wishlist"> -->
+                        <!-- <i class="fa-regular fa-heart text-xl"></i> -->
+                        <!-- <span id="wishlistCount" class="absolute -top-1 -right-1 bg-sunflora-terracotta text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span> -->
+                    <!-- </button> -->
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2 text-sunflora-deepSage hover:text-sunflora-amber transition-colors" title="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-sunflora-amber text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Full-Width Hero Slider -->
+    <section id="hero" class="relative w-full h-[520px] sm:h-[620px] overflow-hidden bg-sunflora-deepSage">
+        
+        <!-- Slide 1 -->
+        <div class="slide-item active">
+            <img src="../img/carousel-2.JPG" alt="Fresh Sunflowers" class="w-full h-full object-cover">
+            <!-- <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent flex items-center"> -->
+                <!-- <div class="max-w-7xl mx-auto px-6 sm:px-12 w-full text-white"> -->
+                    <!-- <span class="inline-block px-3 py-1 bg-sunflora-gold/90 text-sunflora-dark text-xs uppercase tracking-widest font-bold rounded-full mb-4">Seasonal Collection</span> -->
+                    <!-- <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight max-w-2xl"> -->
+                        <!-- Bring Sunlit Warmth to Every Corner. -->
+                    <!-- </h1> -->
+                    <!-- <p class="mt-4 text-sm sm:text-base text-gray-200 max-w-lg font-light"> -->
+                        <!-- Hand-curated sunflowers, wildflowers, and artisan bouquets sourced directly from eco-friendly botanical farms. -->
+                    <!-- </p> -->
+                    <!-- <div class="mt-8 flex flex-wrap gap-4"> -->
+                        <!-- <a href="#shop" class="px-8 py-3.5 bg-sunflora-amber hover:bg-sunflora-gold text-white font-semibold rounded-full shadow-lg transition-all transform hover:-translate-y-0.5"> -->
+                            <!-- Shop Fresh Blooms <i class="fa-solid fa-arrow-right ml-2 text-xs"></i> -->
+                        <!-- </a> -->
+                        <!-- <a href="#categories" class="px-8 py-3.5 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white font-semibold rounded-full border border-white/30 transition-all"> -->
+                            <!-- Explore Categories -->
+                        <!-- </a> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide-item">
+			<img src="../img/carousel-1.JPG" alt="Rose Bouquets" class="w-full h-full object-cover">
+            <!-- <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1920&q=80" alt="Rose Bouquets" class="w-full h-full object-cover"> -->
+            <!-- <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent flex items-center"> -->
+                <!-- <div class="max-w-7xl mx-auto px-6 sm:px-12 w-full text-white"> -->
+                    <!-- <span class="inline-block px-3 py-1 bg-sunflora-terracotta/90 text-white text-xs uppercase tracking-widest font-bold rounded-full mb-4">Artisan Crafted</span> -->
+                    <!-- <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight max-w-2xl"> -->
+                        <!-- Handcrafted Floral Arrangements. -->
+                    <!-- </h1> -->
+                    <!-- <p class="mt-4 text-sm sm:text-base text-gray-200 max-w-lg font-light"> -->
+                        <!-- Express love, sympathy, and celebration with custom floral designs crafted by master florists. -->
+                    <!-- </p> -->
+                    <!-- <div class="mt-8"> -->
+                        <!-- <a href="#shop" class="px-8 py-3.5 bg-sunflora-amber hover:bg-sunflora-gold text-white font-semibold rounded-full shadow-lg transition-all"> -->
+                            <!-- Order Custom Bouquet -->
+                        <!-- </a> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        </div>
+
+        <!-- Slide 3 -->
+        <!-- <div class="slide-item"> -->
+            <!-- <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=1920&q=80" alt="Botanical Plants" class="w-full h-full object-cover"> -->
+            <!-- <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent flex items-center"> -->
+                <!-- <div class="max-w-7xl mx-auto px-6 sm:px-12 w-full text-white"> -->
+                    <!-- <span class="inline-block px-3 py-1 bg-sunflora-sage/90 text-white text-xs uppercase tracking-widest font-bold rounded-full mb-4">Indoor Haven</span> -->
+                    <!-- <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight max-w-2xl"> -->
+                        <!-- Greenery & Living Decor. -->
+                    <!-- </h1> -->
+                    <!-- <p class="mt-4 text-sm sm:text-base text-gray-200 max-w-lg font-light"> -->
+                        <!-- Purify your living space with air-cleansing houseplants, ceramic planters, and indoor greenery. -->
+                    <!-- </p> -->
+                    <!-- <div class="mt-8"> -->
+                        <!-- <a href="#shop" class="px-8 py-3.5 bg-sunflora-amber hover:bg-sunflora-gold text-white font-semibold rounded-full shadow-lg transition-all"> -->
+                            <!-- Discover Houseplants -->
+                        <!-- </a> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+
+        <!-- Slider Navigation Controls -->
+        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md text-white flex items-center justify-center transition-all">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-md text-white flex items-center justify-center transition-all">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Slide Dots -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-3">
+            <button onclick="goToSlide(0)" class="slide-dot w-3 h-3 rounded-full bg-white transition-all"></button>
+            <button onclick="goToSlide(1)" class="slide-dot w-3 h-3 rounded-full bg-white/50 transition-all"></button>
+            <button onclick="goToSlide(2)" class="slide-dot w-3 h-3 rounded-full bg-white/50 transition-all"></button>
+        </div>
+    </section>
+
+    <!-- Main Shop Section -->
+    <main id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-1">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-sunflora-amber font-semibold text-xs tracking-widest uppercase">Natural</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-sunflora-deepSage mt-1">Products</h2>
+            <p class="text-sunflora-dark/70 text-sm mt-2">Sunflora, Committed to Quality Products.</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div id="categories" class="bg-white p-3 sm:p-4 rounded-2xl shadow-sm border border-sunflora-accentBg mb-10 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+                <button onclick="filterCategory('all', this)" class="category-btn active px-5 py-2.5 rounded-full text-xs font-semibold bg-sunflora-deepSage text-white transition-all whitespace-nowrap shadow-sm">
+                    <i class="fa-solid fa-border-all mr-1.5"></i> All Products
+                </button>
+                <button onclick="filterCategory('beverages', this)" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-sunflora-accentBg/60 text-sunflora-dark/80 hover:bg-sunflora-gold/20 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-sun mr-1.5 text-sunflora-amber"></i> Beverages
+                </button>
+                <button onclick="filterCategory('food', this)" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-sunflora-accentBg/60 text-sunflora-dark/80 hover:bg-sunflora-gold/20 transition-all whitespace-nowrap">
+                    <i class="fa-solid fa-seedling mr-1.5 text-sunflora-sage"></i> Food
+                </button>
+                <!-- <button onclick="filterCategory('dried', this)" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-sunflora-accentBg/60 text-sunflora-dark/80 hover:bg-sunflora-gold/20 transition-all whitespace-nowrap"> -->
+                    <!-- <i class="fa-solid fa-leaf mr-1.5 text-sunflora-terracotta"></i> Dried Bouquets -->
+                <!-- </button> -->
+                <!-- <button onclick="filterCategory('gifts', this)" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold bg-sunflora-accentBg/60 text-sunflora-dark/80 hover:bg-sunflora-gold/20 transition-all whitespace-nowrap"> -->
+                    <!-- <i class="fa-solid fa-gift mr-1.5 text-sunflora-amber"></i> Gift Sets -->
+                <!-- </button> -->
+            </div>
+
+            <div class="flex items-center justify-between w-full md:w-auto gap-4 border-t md:border-t-0 pt-3 md:pt-0 border-sunflora-accentBg">
+                <span id="productCount" class="text-xs font-medium text-sunflora-sage">Showing 8 products</span>
+                <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-sunflora-accentBg/50 text-xs text-sunflora-dark font-medium py-2 px-3 rounded-lg border border-transparent focus:outline-none cursor-pointer">
+                    <option value="featured">Sort by: Featured</option>
+                    <option value="low">Price: Low to High</option>
+                    <option value="high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <!-- Rendered dynamically via JS -->
+        </div>
+    </main>
+
+    <!-- Cart Drawer Modal -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-sunflora-cream shadow-2xl flex flex-col pointer-events-auto transform translate-x-full transition-transform duration-300" id="cartContent">
+            <div class="p-6 bg-sunflora-deepSage text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-sunflora-gold"></i>
+                    <h3 class="font-serif text-xl font-bold">Your Shopping Bag</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div id="cartItemsList" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Empty state or cart items -->
+            </div>
+
+            <div class="p-6 bg-white border-t border-sunflora-accentBg space-y-4">
+                <div class="flex justify-between items-center text-sm font-medium">
+                    <span class="text-sunflora-dark/70">Subtotal:</span>
+                    <span id="cartSubtotal" class="text-xl font-bold text-sunflora-deepSage">$0.00</span>
+                </div>
+                <p class="text-[11px] text-sunflora-sage text-center"><i class="fa-solid fa-truck-fast mr-1"></i> Taxes and shipping calculated at checkout.</p>
+                <button onclick="openCheckoutModal()" class="w-full py-3.5 bg-sunflora-amber hover:bg-sunflora-gold text-white font-bold rounded-xl shadow-md transition-all text-center">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div id="wishlistModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm hidden">
+        <div class="bg-sunflora-cream w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-sunflora-accentBg">
+            <div class="p-5 bg-sunflora-deepSage text-white flex justify-between items-center">
+                <h3 class="font-serif text-lg font-bold"><i class="fa-solid fa-heart text-sunflora-gold mr-2"></i> Your Wishlist</h3>
+                <button onclick="toggleWishlistModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div id="wishlistItemsList" class="p-6 max-h-[60vh] overflow-y-auto space-y-4">
+                <!-- Wishlist items dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Buy / Express Checkout Modal -->
+    <div id="buyNowModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-sunflora-accentBg animate-scaleUp">
+            <div class="p-5 bg-sunflora-amber text-white flex justify-between items-center">
+                <h3 class="font-serif text-lg font-bold"><i class="fa-solid fa-bolt mr-2"></i> Express Buy Now</h3>
+                <button onclick="closeBuyNowModal()" class="text-white/80 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            
+            <form onsubmit="handleQuickOrder(event)" class="p-6 space-y-4">
+                <div id="buyNowProductSummary" class="flex items-center gap-4 p-3 bg-sunflora-accentBg/40 rounded-xl mb-4">
+                    <!-- Product details injected here -->
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-sunflora-dark/80 mb-1">Full Name</label>
+                    <input type="text" id="txtname" required placeholder="Jane Doe" class="w-full text-xs py-2.5 px-3 rounded-lg border border-gray-200 focus:border-sunflora-gold focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-sunflora-dark/80 mb-1">Delivery Address</label>
+                    <input type="text" id="txtAddress" required placeholder="123 Sunflowery Lane, Suite 4B" class="w-full text-xs py-2.5 px-3 rounded-lg border border-gray-200 focus:border-sunflora-gold focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-sunflora-dark/80 mb-1">Phone</label>
+                        <input type="tel" id="txtMobile" required placeholder="(555) 019-2834" class="w-full text-xs py-2.5 px-3 rounded-lg border border-gray-200 focus:border-sunflora-gold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-sunflora-dark/80 mb-1">Payment</label>
+                        <select id="txtPayment" name="payment" class="w-full text-xs py-2.5 px-3 rounded-lg border border-gray-200 focus:border-sunflora-gold focus:outline-none bg-white">
+                            <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+							
+							<!-- <option>Credit Card</option> -->
+                            <!-- <option>Apple Pay</option> -->
+                            <!-- <option>Cash on Delivery</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-sunflora-deepSage hover:bg-sunflora-sage text-white font-bold rounded-xl shadow-md transition-all mt-2">
+                    Confirm & Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="imagePreviewModal" onclick="if(event.target === this) closeImageModal()" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-all duration-300">
+        <div class="relative bg-white rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl flex flex-col md:flex-row animate-scaleUp">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="md:w-1/2 h-72 md:h-auto bg-sunflora-accentBg/40 flex items-center justify-center relative overflow-hidden group">
+                <img id="previewModalImg" src="" alt="Product Preview" class="w-full h-full object-cover">
+            </div>
+            <div class="md:w-1/2 p-6 sm:p-8 flex flex-col justify-between bg-sunflora-cream">
+                <div>
+                    <span id="previewModalBadge" class="inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full bg-sunflora-amber mb-3"></span>
+                    <h3 id="previewModalTitle" class="font-serif text-2xl font-bold text-sunflora-dark mb-2"></h3>
+                    <p id="previewModalPrice" class="text-xl font-bold text-sunflora-deepSage mb-3"></p>
+                    <p id="previewModalDesc" class="text-xs text-sunflora-dark/70 leading-relaxed mb-6"></p>
+                </div>
+                <div class="flex gap-3">
+                    <button id="previewModalAddToCartBtn" class="flex-1 py-3 bg-sunflora-accentBg hover:bg-sunflora-gold/20 text-sunflora-deepSage font-semibold text-xs rounded-xl border border-sunflora-gold/30 transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    </button>
+                    <button id="previewModalBuyNowBtn" class="flex-1 py-3 bg-sunflora-amber hover:bg-sunflora-gold text-white font-semibold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-sunflora-deepSage text-sunflora-cream mt-20 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-sunflora-sage/30">
+            <div class="space-y-4">
+                <a href="#" class="flex items-center gap-2">
+                    <i class="fa-solid fa-flower text-sunflora-gold text-2xl"></i>
+                    <span class="font-serif text-2xl font-bold text-white">
+					<img src="../img/Logo1.JPG" alt="Sunflowers Logo" >
+					</span>
+                </a>
+                <p class="text-xs text-sunflora-cream/70 leading-relaxed">
+                    At Sunflora, we are committed to providing pure, natural, and fresh tea products to our customers. Our premium CTC tea is carefully selected to deliver a rich combination of strong color, bold taste, and refreshing aroma in every cup..
+                </p>
+                <div class="flex space-x-3 text-sunflora-gold">
+                    <a href="#" class="w-8 h-8 rounded-full bg-sunflora-sage/30 flex items-center justify-center hover:bg-sunflora-gold hover:text-sunflora-dark transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-sunflora-sage/30 flex items-center justify-center hover:bg-sunflora-gold hover:text-sunflora-dark transition-colors"><i class="fa-brands fa-pinterest text-sm"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-sunflora-sage/30 flex items-center justify-center hover:bg-sunflora-gold hover:text-sunflora-dark transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-serif font-semibold text-white mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-sunflora-cream/70">
+                    <!-- <li><a href="#hero" class="hover:text-sunflora-gold">Top</a></li> -->
+                    <li><a href="#categories" class="hover:text-sunflora-gold">Products</a></li>
+                    <li><a href="#shop" class="hover:text-sunflora-gold">Best Sellers</a></li>
+                    <!-- <li><a href="#" class="hover:text-sunflora-gold">Subscription Boxes</a></li> -->
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-serif font-semibold text-white mb-4">Customer Care</h4>
+                <ul class="space-y-2 text-xs text-sunflora-cream/70">
+                    <li><a href="#" class="hover:text-sunflora-gold">Support : 24*7 days</a></li>
+                    <li><a href="#" class="hover:text-sunflora-gold">Call : +91 91063 81364</a></li>
+                    
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-serif font-semibold text-white mb-4">Contact Us</h4>
+                <p class="text-xs text-sunflora-cream/70 mb-3">At Sunflora, we're committed to providing exceptional service and support.</p>
+                <ul class="space-y-2 text-xs text-sunflora-cream/70">
+                    <!-- <li><a href="#" class="hover:text-sunflora-gold">Call Us: +91 91063 81364</a></li> -->
+                    <li><a href="#" class="hover:text-sunflora-gold">Email Us: SunfloraPortal@gmail.com</a></li>                    
+                </ul>
+				
+				<!-- <form onsubmit="handleNewsletter(event)" class="flex"> -->
+                    <!-- <input type="email" required placeholder="Your email address" class="w-full text-xs px-3 py-2.5 rounded-l-lg bg-sunflora-sage/30 border border-sunflora-sage/40 text-white placeholder-sunflora-cream/50 focus:outline-none"> -->
+                    <!-- <button type="submit" class="bg-sunflora-gold text-sunflora-dark px-4 font-semibold text-xs rounded-r-lg hover:bg-sunflora-amber hover:text-white transition-colors">Join</button> -->
+                <!-- </form> -->
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-sunflora-cream/50">
+            <p>© 2026 Sunflora. All rights reserved.</p>
+            <div class="flex space-x-4 mt-4 sm:mt-0">
+                <span><i class="fa-brands fa-cc-visa text-base"></i></span>
+                <span><i class="fa-brands fa-cc-mastercard text-base"></i></span>
+                <span><i class="fa-brands fa-cc-apple-pay text-base"></i></span>
+                <span><i class="fa-brands fa-cc-paypal text-base"></i></span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "Natural Tea - 1kg",
+                category: "beverages",
+                price: 360.00,
+                originalPrice: 560.00,
+                rating: 4.9,
+                badge: "Offer",
+                badgeColor: "bg-sunflora-amber",
+                <!-- image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80",-->
+				image:"../img/product-1.JPG",
+                description: "Natural CTC Black Tea"
+            },
+            {
+                id: 2,
+                name: "Natural Tea - 500g",
+                category: "beverages",
+                price: 204.00,
+                originalPrice: 290.00,
+                rating: 4.8,
+                badge: "Offer",
+                badgeColor: "bg-sunflora-terracotta",
+                <!-- image: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80", -->
+				image:"../img/product-1.JPG",
+                description: "Natural CTC Black Tea"
+            },
+            {
+                id: 3,
+                name: "Aravalli Forest Honey - 1kg",
+                category: "food",
+                price: 365.00,
+                originalPrice: null,
+                rating: 5.0,
+                badge: "New",
+                badgeColor: "bg-sunflora-sage",
+                <!-- image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80", -->
+				image:"../img/Honey-1.JPG",
+                description: "Aravalli Forest Honey"
+            },
+            <!-- { -->
+                <!-- id: 4, -->
+                <!-- name: "Autumn Sun Dried Floral Meadow", -->
+                <!-- category: "dried", -->
+                <!-- price: 58.00, -->
+                <!-- originalPrice: 65.00, -->
+                <!-- rating: 4.7, -->
+                <!-- badge: "Everlasting", -->
+                <!-- badgeColor: "bg-sunflora-deepSage", -->
+                <!-- image: "https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=600&q=80", -->
+                <!-- description: "Preserved bunny tails, pampas grass, and dried wheat that last for years." -->
+            <!-- }, -->
+            <!-- { -->
+                <!-- id: 5, -->
+                <!-- name: "Wildflower Sunshine Basket", -->
+                <!-- category: "fresh", -->
+                <!-- price: 42.00, -->
+                <!-- originalPrice: 48.00, -->
+                <!-- rating: 4.9, -->
+                <!-- badge: "New Arrival", -->
+                <!-- badgeColor: "bg-sunflora-gold text-sunflora-dark", -->
+                <!-- image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80", -->
+                <!-- description: "Rustic woven basket filled with cheerful yellow daisies and chamomile blooms." -->
+            <!-- }, -->
+            {
+                id: 6,
+                name: "Aravalli Forest Honey - 500g",
+                category: "food",
+                price: 635.00,
+                originalPrice: null,
+                rating: 4.6,
+                badge: "New",
+                badgeColor: "bg-sunflora-sage",
+                <!-- image: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=600&q=80", -->
+				image:"../img/Honey-1.JPG",
+                description: "Aravalli Forest Honey"
+            },
+            <!-- { -->
+                <!-- id: 7, -->
+                <!-- name: "Botanical Candle & Flower Gift Box", -->
+                <!-- category: "gifts", -->
+                <!-- price: 75.00, -->
+                <!-- originalPrice: 90.00, -->
+                <!-- rating: 5.0, -->
+                <!-- badge: "Gift Set", -->
+                <!-- badgeColor: "bg-sunflora-amber", -->
+                <!-- image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80", -->
+                <!-- description: "Includes artisan soy wax scented candle, mini bouquet, and botanical bath salt." -->
+            <!-- }, -->
+            <!-- { -->
+                <!-- id: 8, -->
+                <!-- name: "Terracotta Dried Palm Leaf Bundle", -->
+                <!-- category: "dried", -->
+                <!-- price: 38.00, -->
+                <!-- originalPrice: null, -->
+                <!-- rating: 4.8, -->
+                <!-- badge: "Boho Decor", -->
+                <!-- badgeColor: "bg-sunflora-terracotta", -->
+                <!-- image: "https://images.unsplash.com/photo-1596438459194-f275f413d6ff?auto=format&fit=crop&w=600&q=80", -->
+                <!-- description: "Spear palm leaves and natural grass bouquet for minimalist home aesthetic." -->
+            <!-- } -->
+        ];
+
+        let cart = [];
+        let wishlist = [];
+
+        // Tracks whether the customer is ordering from the cart or using Buy Now.
+        let checkoutMode = "buyNow";
+        let currentQuickOrderProduct = null;
+        let currentSlide = 0;
+        let slideInterval;
+        let activeCategory = 'all';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            startSlider();
+        });
+
+        function startSlider() {
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 5000);
+        }
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide-item');
+            const dots = document.querySelectorAll('.slide-dot');
+            if (!slides.length) return;
+
+            slides.forEach((s, idx) => {
+                s.classList.toggle('active', idx === index);
+            });
+
+            dots.forEach((d, idx) => {
+                if (idx === index) {
+                    d.classList.remove('bg-white/50');
+                    d.classList.add('bg-white', 'w-8');
+                } else {
+                    d.classList.remove('bg-white', 'w-8');
+                    d.classList.add('bg-white/50', 'w-3');
+                }
+            });
+
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide-item');
+            let next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.slide-item');
+            let prev = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prev);
+        }
+
+        function goToSlide(index) {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startSlider();
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            const countEl = document.getElementById('productCount');
+            countEl.innerText = `Showing ${items.length} products`;
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-sunflora-sage">
+                        <i class="fa-solid fa-leaf text-4xl mb-3 opacity-50"></i>
+                        <p class="font-medium text-base">No flowers found matching your criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = items.map(product => {
+                const isWishlisted = wishlist.includes(product.id);
+                return `
+                    <div class="bg-white rounded-2xl overflow-hidden card-shadow border border-sunflora-accentBg flex flex-col group relative">
+                        <div onclick="openImageModal(${product.id})" class="relative h-64 overflow-hidden bg-sunflora-accentBg/30 cursor-pointer">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            
+                            <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold gap-2 backdrop-blur-[1px]">
+                                <i class="fa-solid fa-magnifying-glass-plus text-base"></i> View Image
+                            </div>
+
+                            ${product.badge ? `<span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${product.badgeColor} shadow-sm z-10">${product.badge}</span>` : ''}
+
+                            <button onclick="event.stopPropagation(); toggleWishlist(${product.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm text-sunflora-deepSage flex items-center justify-center transition-all shadow-sm z-10" title="Add to Wishlist">
+                                <i class="${isWishlisted ? 'fa-solid text-sunflora-terracotta' : 'fa-regular'} fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between text-xs text-sunflora-sage font-medium mb-1">
+                                    <span class="capitalize"><i class="fa-solid fa-tag text-[10px] mr-1"></i>${product.category === 'beverages' ? 'Beverages' : product.category === 'food' ? 'Food' : product.category}</span>
+                                    <span class="text-sunflora-amber font-bold"><i class="fa-solid fa-star text-xs mr-1"></i>${product.rating}</span>
+                                </div>
+
+                                <h3 class="font-serif font-bold text-base text-sunflora-dark group-hover:text-sunflora-amber transition-colors line-clamp-1">
+                                    ${product.name}
+                                </h3>
+                                <p class="text-xs text-sunflora-dark/60 mt-1 line-clamp-2 leading-relaxed">
+                                    ${product.description}
+                                </p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-sunflora-accentBg">
+                                <div class="flex items-baseline gap-2 mb-3">
+                                    <span class="text-lg font-bold text-sunflora-deepSage"> ₹${product.price.toFixed(2)}</span>
+                                    ${product.originalPrice ? `<span class="text-xs text-gray-400 line-through"> ₹${product.originalPrice.toFixed(2)}</span>` : ''}
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button onclick="addToCart(${product.id})" class="w-full py-2.5 px-2 bg-sunflora-accentBg hover:bg-sunflora-gold/20 text-sunflora-deepSage font-semibold text-xs rounded-xl border border-sunflora-gold/30 transition-all flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                                    </button>
+                                    <button onclick="buyNow(${product.id})" class="w-full py-2.5 px-2 bg-sunflora-amber hover:bg-sunflora-gold text-white font-semibold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-1.5">
+                                        <i class="fa-solid fa-bolt"></i> Buy Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterCategory(category, btnElement) {
+            // Category values must match the product data: all, beverages, or food.
+            activeCategory = String(category || 'all').toLowerCase().trim();
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-sunflora-deepSage', 'text-white', 'shadow-sm', 'active');
+                btn.classList.add('bg-sunflora-accentBg/60', 'text-sunflora-dark/80');
+            });
+
+            const selectedButton = btnElement || Array.from(document.querySelectorAll('.category-btn'))
+                .find(btn => (btn.getAttribute('onclick') || '').includes(`'${activeCategory}'`));
+            if (selectedButton) {
+                selectedButton.classList.remove('bg-sunflora-accentBg/60', 'text-sunflora-dark/80');
+                selectedButton.classList.add('bg-sunflora-deepSage', 'text-white', 'shadow-sm', 'active');
+            }
+
+            applyProductFilters();
+        }
+
+        function applyProductFilters() {
+            const term = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+            const criteria = document.getElementById('sortSelect')?.value || 'featured';
+
+            let filtered = products.filter(product => {
+                const category = String(product.category || '').toLowerCase().trim();
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+                const matchesSearch = !term ||
+                    String(product.name || '').toLowerCase().includes(term) ||
+                    String(product.description || '').toLowerCase().includes(term) ||
+                    category.includes(term);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (criteria === 'low') filtered.sort((a, b) => a.price - b.price);
+            else if (criteria === 'high') filtered.sort((a, b) => b.price - a.price);
+            else if (criteria === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+            renderProducts(filtered);
+        }
+
+        function sortProducts(criteria) {
+            applyProductFilters();
+        }
+
+        function handleSearch(query) {
+            applyProductFilters();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${product.name}" to cart!`, 'cart');
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCountEl = document.getElementById('cartCount');
+            const cartList = document.getElementById('cartItemsList');
+            const subtotalEl = document.getElementById('cartSubtotal');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalSubtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cartCountEl.innerText = totalCount;
+            subtotalEl.innerText = `₹${totalSubtotal.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-12 text-sunflora-sage">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 opacity-40"></i>
+                        <p class="text-sm font-medium">Your shopping cart is currently empty.</p>
+                        <a href="#shop" onclick="toggleCartDrawer()" class="inline-block mt-4 px-5 py-2 bg-sunflora-gold text-sunflora-dark text-xs font-bold rounded-full">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            cartList.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-sunflora-accentBg shadow-sm">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-xs text-sunflora-dark line-clamp-1">${item.name}</h4>
+                        <span class="text-xs font-semibold text-sunflora-deepSage">₹${item.price.toFixed(2)}</span>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateCartQuantity(${item.id}, -1)" class="w-5 h-5 rounded bg-sunflora-accentBg text-xs font-bold flex items-center justify-center">-</button>
+                            <span class="text-xs font-bold">${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${item.id}, 1)" class="w-5 h-5 rounded bg-sunflora-accentBg text-xs font-bold flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                    <button onclick="updateCartQuantity(${item.id}, -${item.quantity})" class="text-gray-400 hover:text-sunflora-terracotta text-xs p-1">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            const content = document.getElementById('cartContent');
+            
+            if (drawer.classList.contains('opacity-0')) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                content.classList.remove('translate-x-full');
+            } else {
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('opacity-0', 'pointer-events-none');
+                }, 300);
+            }
+        }
+
+        function toggleWishlist(productId) {
+            const idx = wishlist.indexOf(productId);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast("Removed from wishlist", "info");
+            } else {
+                wishlist.push(productId);
+                showToast("Saved to your wishlist!", "heart");
+            }
+            document.getElementById('wishlistCount').innerText = wishlist.length;
+            renderProducts(products.filter(p => activeCategory === 'all' || p.category === activeCategory));
+            updateWishlistUI();
+        }
+
+        function toggleWishlistModal() {
+            const modal = document.getElementById('wishlistModal');
+            if (modal.classList.contains('hidden')) {
+                updateWishlistUI();
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function updateWishlistUI() {
+            const list = document.getElementById('wishlistItemsList');
+            const wishlistedProducts = products.filter(p => wishlist.includes(p.id));
+
+            if (wishlistedProducts.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-8 text-sunflora-sage">
+                        <i class="fa-regular fa-heart text-3xl mb-2 opacity-50"></i>
+                        <p class="text-xs">Your wishlist is currently empty.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = wishlistedProducts.map(p => `
+                <div class="flex items-center justify-between gap-4 p-3 bg-white rounded-xl border border-sunflora-accentBg">
+                    <div class="flex items-center gap-3">
+                        <img src="${p.image}" class="w-12 h-12 object-cover rounded-lg">
+                        <div>
+                            <h4 class="font-bold text-xs text-sunflora-dark line-clamp-1">${p.name}</h4>
+                            <span class="text-xs text-sunflora-deepSage font-semibold">₹${p.price.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="addToCart(${p.id}); toggleWishlistModal();" class="px-3 py-1.5 bg-sunflora-amber text-white text-xs font-bold rounded-lg hover:bg-sunflora-gold">
+                            Add to Bag
+                        </button>
+                        <button onclick="toggleWishlist(${p.id})" class="text-gray-400 hover:text-sunflora-terracotta text-xs">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function buyNow(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                showToast("Product not found!", "info");
+                return;
+            }
+
+            checkoutMode = "buyNow";
+            currentQuickOrderProduct = product;
+
+            const summary = document.getElementById('buyNowProductSummary');
+            summary.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-lg">
+                <div>
+                    <h4 class="font-serif font-bold text-sm text-sunflora-dark">${product.name}</h4>
+                    <p class="text-xs text-sunflora-sage">${product.description.substring(0, 50)}...</p>
+                    <span class="text-base font-bold text-sunflora-deepSage mt-1 block">₹${product.price.toFixed(2)}</span>
+                </div>
+            `;
+
+            document.getElementById('buyNowModal').classList.remove('hidden');
+        }
+
+        function closeBuyNowModal() {
+            document.getElementById('buyNowModal').classList.add('hidden');
+        }
+
+        function handleQuickOrder(e) {
+            e.preventDefault();
+
+            const nameElement = document.getElementById("txtname");
+            const addressElement = document.getElementById("txtAddress");
+            const mobileElement = document.getElementById("txtMobile");
+            const paymentElement = document.getElementById("txtPayment");
+
+            const name = nameElement ? nameElement.value.trim() : "";
+            const address = addressElement ? addressElement.value.trim() : "";
+            const mobile = mobileElement ? mobileElement.value.trim() : "";
+            const payment = paymentElement ? paymentElement.value : "Cash on Delivery (COD)";
+
+            let orderItems = [];
+
+            if (checkoutMode === "cart") {
+                orderItems = cart.map(item => ({
+                    name: item.name,
+                    price: Number(item.price) || 0,
+                    quantity: Number(item.quantity) || 1,
+                    lineTotal: (Number(item.price) || 0) * (Number(item.quantity) || 1)
+                }));
+            } else if (currentQuickOrderProduct) {
+                const product = currentQuickOrderProduct;
+                orderItems = [{
+                    name: product.name,
+                    price: Number(product.price) || 0,
+                    quantity: 1,
+                    lineTotal: Number(product.price) || 0
+                }];
+            }
+
+            if (orderItems.length === 0) {
+                showToast("No products found in your order!", "info");
+                return;
+            }
+
+            const totalQuantity = orderItems.reduce((sum, item) => sum + item.quantity, 0);
+            const totalAmount = orderItems.reduce((sum, item) => sum + item.lineTotal, 0);
+
+            const productDetails = orderItems.map((item, index) =>
+                `${index + 1}. ${item.name}\n` +
+                `   Price: ₹${item.price.toFixed(2)}\n` +
+                `   Quantity: ${item.quantity}\n` +
+                `   Subtotal: ₹${item.lineTotal.toFixed(2)}`
+            ).join("\n\n");
+
+            const message = `*SUNFLORA - NEW ORDER*\n\n` +
+                `*Customer Details*\n` +
+                `Name: ${name}\n` +
+                `Address: ${address}\n` +
+                `Phone: ${mobile}\n\n` +
+                `*Order Details (${orderItems.length} product type(s))*\n${productDetails}\n\n` +
+                `*Total Quantity:* ${totalQuantity}\n` +
+                `*Total Amount: ₹${totalAmount.toFixed(2)}*\n` +
+                `Payment Method: ${payment}\n\n` +
+                `Please confirm my order.`;
+
+            const whatsappNumber = "919106381364";
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            const whatsappWindow = window.open(whatsappURL, "_blank");
+
+            if (!whatsappWindow) {
+                // Popup blockers may prevent a new tab; navigate the current tab instead.
+                window.location.href = whatsappURL;
+                return;
+            }
+
+            closeBuyNowModal();
+            showToast("Order details are ready in WhatsApp. Send the message to confirm your order.", "success");
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty!", "info");
+                return;
+            }
+
+            checkoutMode = "cart";
+            currentQuickOrderProduct = null;
+
+            // Close the cart drawer before opening the checkout form.
+            const drawer = document.getElementById('cartDrawer');
+            if (!drawer.classList.contains('opacity-0')) {
+                toggleCartDrawer();
+            }
+
+            const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+            document.getElementById('buyNowProductSummary').innerHTML = `
+                <div class="w-full">
+                    <div class="flex justify-between items-center text-xs mb-3">
+                        <span class="font-bold text-sunflora-dark">Your Shopping Bag (${totalQuantity} item(s))</span>
+                        <span class="font-bold text-sunflora-deepSage text-base">₹${totalAmount.toFixed(2)}</span>
+                    </div>
+                    <div class="space-y-2 max-h-36 overflow-y-auto">
+                        ${cart.map(item => `
+                            <div class="flex justify-between gap-3 text-xs border-t border-sunflora-accentBg pt-2">
+                                <span class="text-sunflora-dark">${item.name} × ${item.quantity}</span>
+                                <span class="font-semibold whitespace-nowrap">₹${(Number(item.price) * Number(item.quantity)).toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p class="text-[10px] text-sunflora-sage mt-3">All items listed above will be included in your WhatsApp order.</p>
+                </div>
+            `;
+
+            document.getElementById('buyNowModal').classList.remove('hidden');
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast("Welcome to the Sunflora Bloom Club! Check your inbox for 15% off.", "success");
+        }
+
+        function openImageModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('previewModalImg').src = product.image;
+            document.getElementById('previewModalTitle').innerText = product.name;
+            document.getElementById('previewModalPrice').innerText = `₹${product.price.toFixed(2)}`;
+            document.getElementById('previewModalDesc').innerText = product.description;
+            
+            const badgeEl = document.getElementById('previewModalBadge');
+            if (product.badge) {
+                badgeEl.innerText = product.badge;
+                badgeEl.className = `inline-block text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${product.badgeColor} mb-3`;
+                badgeEl.classList.remove('hidden');
+            } else {
+                badgeEl.classList.add('hidden');
+            }
+
+            const addToCartBtn = document.getElementById('previewModalAddToCartBtn');
+            addToCartBtn.onclick = () => {
+                addToCart(product.id);
+                closeImageModal();
+            };
+
+            const buyNowBtn = document.getElementById('previewModalBuyNowBtn');
+            buyNowBtn.onclick = () => {
+                closeImageModal();
+                buyNow(product.id);
+            };
+
+            const modal = document.getElementById('imagePreviewModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imagePreviewModal').classList.add('hidden');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let icon = 'fa-info-circle';
+            if (type === 'cart') icon = 'fa-bag-shopping text-sunflora-gold';
+            else if (type === 'heart') icon = 'fa-heart text-sunflora-terracotta';
+            else if (type === 'success') icon = 'fa-circle-check text-green-500';
+
+            toast.className = 'toast-slide bg-sunflora-dark text-white text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-white/10 pointer-events-auto min-w-[260px]';
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-base"></i>
+                <span class="font-medium">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
